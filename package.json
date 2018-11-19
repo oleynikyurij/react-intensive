@@ -1,7 +1,7 @@
 {
     "name": "react-online-intensive",
     "version": "3.0.0",
-    "author": "Dima Vakatsiienko <dvakatsiienko@lectrum.io>",
+    "author": "  ",
     "private": true,
     "scripts": {
         "start": "cross-env-shell NODE_ENV=development node --require @babel/register \"./scripts/webpack/start.js\"",

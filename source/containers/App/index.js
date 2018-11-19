@@ -1,12 +1,20 @@
 // Core
 import React, { Component } from 'react';
-import { hot } from 'react-hot-loader';
+
 //Component
 import Feed from 'components/Feed';
 
-@hot(module)
+//Instrument
+import avatar from 'theme/assets/Lisa';
+
+const options = {
+    avatar,
+    currentUserFirstName: 'Lisa',
+    currentUserLastName:  'Simpson',
+};
+
 export default class App extends Component {
     render() {
-        return <Feed />;
+        return <Feed  { ...options }/>;
     }
 }

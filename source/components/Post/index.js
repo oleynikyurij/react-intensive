@@ -26,7 +26,9 @@ export default class Post extends Component {
                             {context.currentUserFirstName} {context.currentUserLastName}
                         </a>
                         <time>
-                            {moment.unix(created).format('MMMM D h:mm:ss a')}
+                            {moment(created)
+                                .utc()
+                                .format('MMMM D h:mm:ss a')}
                         </time>
                         <p>{comment}</p>
                     </section>

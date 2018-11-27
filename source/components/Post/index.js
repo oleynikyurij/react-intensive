@@ -1,23 +1,29 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import PropTypes from 'prop-types';
+import { string, func, number, array } from 'prop-types';
 
+import Like from 'components/Like';
 import { Consumer } from 'components/HOC/withProfile';
 //Instrument
 import Styles from './styles.m.css';
 
 export default class Post extends Component {
     static propTypes = {
-        comment: PropTypes.string.isRequired,
+        comment:   string.isRequired,
+        created:   number.isRequired,
+        id:        string.isRequired,
+        _likePost: func.isRequired,
+        likes:     array.isRequired,
     };
 
     render() {
-        const { comment, created } = this.props;
+        const { comment, created, _likePost, id, likes } = this.props;
 
         return (
             <Consumer>
                 {(context) => (
                     <section className = { Styles.post }>
+                        <span className = { Styles.cross } />
                         <img
                             alt = 'avatar'
                             src = { context.avatar }
@@ -31,6 +37,12 @@ export default class Post extends Component {
                                 .format('MMMM D h:mm:ss a')}
                         </time>
                         <p>{comment}</p>
+                        <Like
+                            _likePost = { _likePost }
+                            id = { id }
+                            likes = { likes }
+                            { ...context }
+                        />
                     </section>
                 )}
             </Consumer>

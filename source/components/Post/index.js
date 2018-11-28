@@ -9,21 +9,25 @@ import Styles from './styles.m.css';
 
 export default class Post extends Component {
     static propTypes = {
-        comment:   string.isRequired,
-        created:   number.isRequired,
-        id:        string.isRequired,
-        _likePost: func.isRequired,
-        likes:     array.isRequired,
+        comment:     string.isRequired,
+        created:     number.isRequired,
+        id:          string.isRequired,
+        _likePost:   func.isRequired,
+        _deletePost: func.isRequired,
+        likes:       array.isRequired,
     };
 
     render() {
-        const { comment, created, _likePost, id, likes } = this.props;
+        const { comment, created, _likePost, _deletePost, id, likes } = this.props;
 
         return (
             <Consumer>
                 {(context) => (
                     <section className = { Styles.post }>
-                        <span className = { Styles.cross } />
+                        <span
+                            className = { Styles.cross }
+                            onClick = { () => _deletePost(id) }
+                        />
                         <img
                             alt = 'avatar'
                             src = { context.avatar }

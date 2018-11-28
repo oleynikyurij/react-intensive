@@ -16,6 +16,7 @@ export default class Feed extends Component {
         this._createPost = this._createPost.bind(this);
         this._likePost = this._likePost.bind(this);
         this._setPostFetchingState = this._setPostFetchingState.bind(this);
+        this._deletePost = this._deletePost.bind(this);
     }
 
     state = {
@@ -87,6 +88,26 @@ export default class Feed extends Component {
         });
     }
 
+    // удаление поста
+    _deletePost(id) {
+        console.log('click');
+
+        this.setState(({ posts }) => {
+            // находим индекс элемента  который надо удалить
+            const index = posts.findIndex((el) => el.id === id);
+            console.log(index);
+            // создаём новый массив, без удалённого элемента
+            const before = posts.slice(0, index);
+            const after = posts.slice(index + 1);
+
+            const newArr = [ ...before, ...after ];
+
+            return {
+                posts: newArr,
+            };
+        });
+    }
+
     render() {
         const { posts, isSpinningRun } = this.state;
 
@@ -95,6 +116,7 @@ export default class Feed extends Component {
                 <Post
                     key = { post.id }
                     { ...post }
+                    _deletePost = { this._deletePost }
                     _likePost = { this._likePost }
                 />
             );

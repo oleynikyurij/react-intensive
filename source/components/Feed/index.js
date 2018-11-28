@@ -89,9 +89,9 @@ export default class Feed extends Component {
     }
 
     // удаление поста
-    _deletePost(id) {
+    async _deletePost(id) {
         console.log('click');
-
+        await delay(1000);
         this.setState(({ posts }) => {
             // находим индекс элемента  который надо удалить
             const index = posts.findIndex((el) => el.id === id);

@@ -90,6 +90,7 @@ export default class Feed extends Component {
 
     // удаление поста
     async _deletePost(id) {
+        this._setPostFetchingState(true);
         console.log('click');
         await delay(1000);
         this.setState(({ posts }) => {
@@ -103,7 +104,8 @@ export default class Feed extends Component {
             const newArr = [ ...before, ...after ];
 
             return {
-                posts: newArr,
+                posts:         newArr,
+                isSpinningRun: false,
             };
         });
     }

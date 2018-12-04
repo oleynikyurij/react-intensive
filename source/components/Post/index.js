@@ -23,6 +23,8 @@ export default class Post extends Component {
         const { comment, created, _likePost, _deletePost, id, likes } = this.props;
         const { avatar, currentUserFirstName, currentUserLastName } = this.props;
 
+        // throw new Error();
+
         return (
             <section className = { Styles.post }>
                 <span className = { Styles.cross } />

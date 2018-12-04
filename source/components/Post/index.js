@@ -46,7 +46,6 @@ export default class Post extends Component {
                             _likePost = { _likePost }
                             id = { id }
                             likes = { likes }
-                            
                         />
                     </section>
                 )}

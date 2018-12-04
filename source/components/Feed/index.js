@@ -9,7 +9,7 @@ import Post from 'components/Post';
 import Spinner from 'components/Spinner';
 //Instrument
 import Styles from './styles.m.css';
-import { getUniqueID, delay } from 'instruments';
+
 import { api, TOKEN } from 'config/api';
 
 @withProfile

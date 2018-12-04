@@ -19,28 +19,32 @@ export default class Post extends Component {
         _deletePost: func.isRequired,
     };
 
+    _deletePost = () => {
+        const { _deletePost, id } = this.props;
+        _deletePost(id);
+    };
+
+    _getCross = () => {
+        const { firstName, lastName, currentUserFirstName, currentUserLastName } = this.props;
+
+        return `${firstName} ${lastName}` === `${currentUserFirstName} ${currentUserLastName}` ? (
+            <span
+                className = { Styles.cross }
+                onClick = { this._deletePost }
+            />
+        ) : null;
+    };
+
     render() {
-        const {
-            comment,
-            created,
-            _likePost,
-            _deletePost,
-            id,
-            likes,
-            avatar,
-            firstName,
-            lastName,
-        } = this.props;
+        const { comment, created, _likePost, id, likes, avatar, firstName, lastName } = this.props;
+
+        const cross = this._getCross();
 
         // throw new Error();
 
         return (
             <section className = { Styles.post }>
-                <span className = { Styles.cross } />
-                <span
-                    className = { Styles.cross }
-                    onClick = { () => _deletePost(id) }
-                />
+                {cross}
                 <img
                     alt = 'avatar'
                     src = { avatar }

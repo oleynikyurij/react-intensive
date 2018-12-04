@@ -11,14 +11,6 @@ import Styles from './styles.m.css';
 import { getUniqueID, delay } from 'instruments';
 
 export default class Feed extends Component {
-    constructor() {
-        super();
-        this._createPost = this._createPost.bind(this);
-        this._likePost = this._likePost.bind(this);
-        this._setPostFetchingState = this._setPostFetchingState.bind(this);
-        this._deletePost = this._deletePost.bind(this);
-    }
-
     state = {
         posts: [
             {
@@ -37,13 +29,13 @@ export default class Feed extends Component {
         isSpinningRun: false,
     };
 
-    _setPostFetchingState(state) {
+    _setPostFetchingState = (state) => {
         this.setState({
             isSpinningRun: state,
         });
-    }
+    };
 
-    async _createPost(comment) {
+    _createPost = async (comment) => {
         this._setPostFetchingState(true);
         const post = {
             id:      getUniqueID(),
@@ -57,9 +49,9 @@ export default class Feed extends Component {
             posts:         [ post, ...posts ],
             isSpinningRun: false,
         }));
-    }
+    };
 
-    async _likePost(id) {
+    _likePost = async (id) => {
         const { currentUserFirstName, currentUserLastName } = this.props;
         this._setPostFetchingState(true);
 
@@ -86,25 +78,34 @@ export default class Feed extends Component {
             posts:         newPosts,
             isSpinningRun: false,
         });
-    }
+    };
 
     // удаление поста
-    _deletePost(id) {
+    _deletePost = async (id) => {
         // console.log('click');
-        this.setState(({ posts }) => {
-            // находим индекс элемента  который надо удалить
-            const index = posts.findIndex((el) => el.id === id);
-            // console.log(index);
-            // создаём новый массив, без удалённого элемента
-            const before = posts.slice(0, index);
-            const after = posts.slice(index + 1);
-            const newArr = [ ...before, ...after ];
+        // this.setState(({ posts }) => {
+        //     // находим индекс элемента  который надо удалить
+        //     const index = posts.findIndex((el) => el.id === id);
+        //     // console.log(index);
+        //     // создаём новый массив, без удалённого элемента
+        //     const before = posts.slice(0, index);
+        //     const after = posts.slice(index + 1);
+        //     const newArr = [ ...before, ...after ];
 
-            return {
-                posts: newArr,
-            };
-        });
-    }
+        //     return {
+        //         posts: newArr,
+        //     };
+        // });
+
+        this._setPostFetchingState(true);
+
+        await delay(1000);
+
+        this.setState(({ posts }) => ({
+            posts:         posts.filter((post) => post.id !== id),
+            isSpinningRun: false,
+        }));
+    };
 
     render() {
         const { posts, isSpinningRun } = this.state;

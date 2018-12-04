@@ -17,53 +17,41 @@ export default class Like extends Component {
         ).isRequired,
     };
 
-    constructor() {
-        super();
-
-        this._getLikedByMe = this._getLikedByMe.bind(this);
-        this._getLikeStyles = this._getLikeStyles.bind(this);
-        this._likePost = this._likePost.bind(this);
-        this._showLikers = this._showLikers.bind(this);
-        this._hideLikers = this._hideLikers.bind(this);
-        this._getLikersList = this._getLikersList.bind(this);
-        this._getLikesDescription = this._getLikesDescription.bind(this);
-    }
-
     state = {
         showLikers: false,
     };
 
-    _showLikers() {
+    _showLikers = () => {
         this.setState({ showLikers: true });
-    }
+    };
 
-    _hideLikers() {
+    _hideLikers = () => {
         this.setState({ showLikers: false });
-    }
+    };
 
-    _likePost() {
+    _likePost = () => {
         const { _likePost, id } = this.props;
         // console.log(this.props);
         _likePost(id);
-    }
+    };
 
-    _getLikedByMe() {
+    _getLikedByMe = () => {
         const { currentUserFirstName, currentUserLastName, likes } = this.props;
 
         return likes.some(({ firstName, lastName }) => {
             return `${firstName} ${lastName}` === `${currentUserFirstName} ${currentUserLastName}`;
         });
-    }
+    };
 
-    _getLikeStyles() {
+    _getLikeStyles = () => {
         const likedByMe = this._getLikedByMe();
 
         return cx(Styles.icon, {
             [ Styles.liked ]: likedByMe,
         });
-    }
+    };
 
-    _getLikersList() {
+    _getLikersList = () => {
         const { showLikers } = this.state;
         const { likes } = this.props;
 
@@ -72,9 +60,9 @@ export default class Like extends Component {
         ));
 
         return likes.length && showLikers ? <ul>{likesJSX}</ul> : null;
-    }
+    };
 
-    _getLikesDescription() {
+    _getLikesDescription = () => {
         const { likes, currentUserFirstName, currentUserLastName } = this.props;
 
         const likedByMe = this._getLikedByMe();
@@ -86,7 +74,7 @@ export default class Like extends Component {
         } else if (likedByMe) {
             return likes.length;
         }
-    }
+    };
 
     render() {
         // console.log('this.props', this.props);

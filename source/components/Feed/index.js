@@ -9,7 +9,6 @@ import Post from 'components/Post';
 import Spinner from 'components/Spinner';
 //Instrument
 import Styles from './styles.m.css';
-
 import { api, TOKEN } from 'config/api';
 
 @withProfile
@@ -21,6 +20,12 @@ export default class Feed extends Component {
 
     componentDidMount() {
         this._fetchPosts();
+        this.refetch = setInterval(this._fetchPosts, 1000);
+    }
+
+    //очищаем таймер
+    componentWillUnmount() {
+        clearInterval(this.refetch);
     }
 
     _setPostFetchingState = (state) => {

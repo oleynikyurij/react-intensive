@@ -11,8 +11,8 @@ import avatar from 'theme/assets/cat';
 
 const options = {
     avatar,
-    currentUserFirstName: 'Кот',
-    currentUserLastName:  'Котофеич',
+    currentUserFirstName: 'Юрий',
+    currentUserLastName:  'Оленик',
 };
 
 export default class App extends Component {

@@ -20,8 +20,17 @@ export default class Post extends Component {
     };
 
     render() {
-        const { comment, created, _likePost, _deletePost, id, likes } = this.props;
-        const { avatar, currentUserFirstName, currentUserLastName } = this.props;
+        const {
+            comment,
+            created,
+            _likePost,
+            _deletePost,
+            id,
+            likes,
+            avatar,
+            firstName,
+            lastName,
+        } = this.props;
 
         // throw new Error();
 
@@ -36,14 +45,8 @@ export default class Post extends Component {
                     alt = 'avatar'
                     src = { avatar }
                 />
-                <a>
-                    {currentUserFirstName} {currentUserLastName}
-                </a>
-                <time>
-                    {moment(created)
-                        .utc()
-                        .format('MMMM D h:mm:ss a')}
-                </time>
+                <a>{`${firstName} ${lastName}`}</a>
+                <time>{moment.unix(created).format('MMMM D h:mm:ss a')}</time>
                 <p>{comment}</p>
                 <Like
                     _likePost = { _likePost }

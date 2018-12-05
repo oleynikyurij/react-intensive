@@ -26,7 +26,7 @@ export default class StatusBar extends Component {
         });
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         socket.removeListener('connect');
         socket.removeListener('disconnect');
     }
@@ -36,8 +36,8 @@ export default class StatusBar extends Component {
         const { online } = this.state;
 
         const statusStyle = cx(Styles.status, {
-            [ Styles.online ]: online,
-            [ Styles.onffline ]: !online,
+            [ Styles.online ]:  online,
+            [ Styles.offline ]: !online,
         });
 
         const statusMessage = online ? 'OnLine' : 'OffLine';

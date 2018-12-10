@@ -52,8 +52,8 @@ export default class StatusBar extends Component {
             <Transition
                 appear
                 in
-                onEnter = { this._animateStatusBarEnter }
-                timeout = { 2000 }>
+                timeout = { 2000 }
+                onEnter = { this._animateStatusBarEnter }>
                 <section className = { Styles.statusBar }>
                     <div className = { statusStyle }>
                         <div>{statusMessage}</div>

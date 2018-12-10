@@ -162,11 +162,13 @@ export default class Feed extends Component {
                     classNames = {{
                         enter:       Styles.postInStart,
                         enterActive: Styles.postInEnd,
+                        exit:        Styles.postOutStart,
+                        exitActive:  Styles.postOutEnd,
                     }}
                     key = { post.id }
                     timeout = {{
-                        enter: 9000,
-                        exit:  8000,
+                        enter: 900,
+                        exit:  800,
                     }}>
                     <Post
                         { ...post }

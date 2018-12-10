@@ -18,8 +18,9 @@ import { socket } from 'socket/init';
 @withProfile
 export default class Feed extends Component {
     state = {
-        posts:         [],
-        isSpinningRun: false,
+        posts:          [],
+        isSpinningRun:  false,
+        animatePostman: true,
     };
 
     componentDidMount() {
@@ -139,6 +140,19 @@ export default class Feed extends Component {
         fromTo(composer, 3, { opacity: 0, rotationX: 100 }, { opacity: 1, rotationX: 0 });
     };
 
+    _animatePostmanEnter = (Postman) => {
+        fromTo(Postman, 2, { opacity: 0, x: 200, y: -550 }, { opacity: 1, x: 0, y: 0 });
+        setTimeout(() => {
+            this.setState(({ animatePostman }) => ({
+                animatePostman: !animatePostman,
+            }));
+        }, 5000);
+    };
+
+    _animatePostmanExit = (Postman) => {
+        fromTo(Postman, 2, { opacity: 1, y: 0, x: 0 }, { opacity: 0, y: 100, x: 200 });
+    };
+
     render() {
         const { posts, isSpinningRun } = this.state;
 
@@ -174,7 +188,14 @@ export default class Feed extends Component {
                     onEnter = { this._animateComposerEnter }>
                     <Composer _createPost = { this._createPost } />
                 </Transition>
-                <Postman />
+                <Transition
+                    appear
+                    in = { this.state.animatePostman }
+                    timeout = { 2000 }
+                    onEnter = { this._animatePostmanEnter }
+                    onExit = { this._animatePostmanExit }>
+                    <Postman />
+                </Transition>
                 <TransitionGroup>{postJSX}</TransitionGroup>
             </section>
         );
